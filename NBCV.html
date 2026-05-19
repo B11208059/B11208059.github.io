@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>總裁的學生知識庫 | 探索未知</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Modal Scrollbar customization */
+        #modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        #modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        #modal-body::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        #modal-body::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <span class="font-bold text-xl tracking-tight">總裁知識庫</span>
+                </div>
+                <div class="hidden sm:flex space-x-8">
+                    <a href="#resources" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">精選資源庫</a>
+                    <a href="#faq" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">常見問題 FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section & Search -->
+    <section class="bg-slate-900 py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                探索那些 <span class="text-blue-400">顛覆認知</span> 的奇妙真相
+            </h1>
+            <p class="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
+                從史前文明、深海謎團到腦科學與人工智慧。專為熱愛思考的學生打造的專屬知識樞紐。
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <input type="text" id="search-input" class="block w-full pl-12 pr-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white focus:text-slate-900 focus:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-lg shadow-lg" placeholder="搜尋歷史、科學、AI、未解之謎...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+
+        <!-- Error Message for Search -->
+        <div id="no-results" class="hidden text-center py-10">
+            <svg class="mx-auto h-12 w-12 text-slate-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h3 class="text-lg font-medium text-slate-900">找不到相關知識</h3>
+            <p class="text-slate-500 mt-1">請嘗試使用其他關鍵字，例如：AI、大腦、復活節島、中醫...</p>
+        </div>
+
+        <!-- Resources Section -->
+        <section id="resources" class="mb-20 search-container">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="h-8 w-2 bg-blue-600 rounded-full"></div>
+                <h2 class="text-3xl font-bold text-slate-800">精選資源庫</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="resource-grid">
+                
+                <!-- Card 1 -->
+                <div class="resource-card bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full mb-4">歷史與考古</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">復活節島真相：顛覆「生態崩潰」的生存奇蹟</h3>
+                        <p class="text-slate-600 line-clamp-3 mb-4 text-sm leading-relaxed">
+                            《槍砲、病菌與鋼鐵》作者曾認為島民砍光樹木導致滅絕。但最新考古發現，是老鼠入侵吃光了棕櫚樹種子。島民其實展現了極高的工程智慧，發明了固態水庫、緩釋肥和防風溫室來求生。
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <button class="open-modal-btn w-full py-2.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 font-medium rounded-xl transition-colors"
+                            data-title="復活節島的生存奇蹟"
+                            data-content="戴蒙德曾將復活節島描述為生態浩劫的完美樣本，認為島民為了建造石像砍光了1600萬棵棕櫚樹。然而，考古學家卡爾·利波的最新研究推翻了這點：\n\n1. 樹木滅絕的真兇：是跟隨船隻抵達的老鼠。牠們瘋狂繁殖，吃光了棕櫚果實，導致樹木出生率為零。\n\n2. 火星救援級的生存科技：在失去樹林、土壤貧瘠的惡劣環境下，島民發明了三大黑科技：\n   - 固態水庫：在農田鋪滿火山碎石，白天隔熱防蒸發，晚上冷凝空氣水分灌溉。\n   - 緩釋肥機器：不斷翻動富含磷和鈣的火山岩碎石，為農作物施肥。\n   - 馬拉維（溫室石牆）：為每株植物建造專屬石堡，抵擋寒冷海風，創造溫暖濕潤的微氣候。\n\n他們並非愚蠢地毀滅生態，而是在極限環境中展現了驚人的合作與生存智慧。">
+                            深入閱讀
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="resource-card bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full mb-4">生物與大腦</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">哈佛科學家中風經歷：看見宇宙底層代碼</h3>
+                        <p class="text-slate-600 line-clamp-3 mb-4 text-sm leading-relaxed">
+                            頂尖腦科學家吉爾在左腦中風關閉後，右腦接管了意識。她感覺自己與宇宙融為一體，失去了邊界感。她發現，所有負面情緒的化學反應在體內只會持續90秒。
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <button class="open-modal-btn w-full py-2.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 font-medium rounded-xl transition-colors"
+                            data-title="腦中風後的宇宙體驗與90秒法則"
+                            data-content="哈佛腦科學家吉爾 (Jill Bolte Taylor) 經歷了一次嚴重的左腦中風。當負責邏輯、語言和「自我邊界」的左腦（OAA 定向聯絡區）被破壞後，她體會到了奇特的感覺：\n\n1. 宇宙合一：她感覺不到身體的邊界，感覺自己變成了一股流動的液態能量，與萬物合一，充滿了無限的寧靜與喜悅（類似佛教中的「空性」或「開悟」）。\n\n2. 90秒情緒法則：在長達八年的康復中，她發現了一個秘密：任何情緒（如憤怒、恐懼）引發的化學物質沖刷全身並被分解的過程，絕對不超過90秒。\n\n3. 大腦的「敘事者」：如果90秒後你還在生氣，是因為左腦中一個叫「敘事者」的機制在不斷編造故事，手動按下了循環播放鍵。只要不給這條神經迴路「通電」（不去順著思考），痛苦的迴路就會萎縮。\n\n這證明了我們的大腦不僅是感知世界的工具，更是一個過濾真實世界的「減壓閥」。">
+                            深入閱讀
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="resource-card bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-4">自然與科技</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">AI 破解烏鴉語言：地球上的另一波文明？</h3>
+                        <p class="text-slate-600 line-clamp-3 mb-4 text-sm leading-relaxed">
+                            科學家利用 AI (如地球物種計畫 ESP) 分析烏鴉叫聲，發現牠們擁有兩套通訊系統（廣播與加密私語），具備「遞歸」邏輯能力，甚至懂得社會工程學。
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <button class="open-modal-btn w-full py-2.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 font-medium rounded-xl transition-colors"
+                            data-title="烏鴉：不可思議的影子文明"
+                            data-content="科學家對烏鴉的研究發現了令人震驚的智慧特徵：\n\n1. 欺騙與主觀意識：烏鴉會假裝把食物藏起來以欺騙同伴。神經學家在烏鴉大腦中找到了主觀體驗的物理證據，證明牠們不是單純的條件反射，而是在「思考」。\n\n2. 遞歸邏輯與語言：烏鴉能理解像括號套娃一樣的「遞歸」邏輯，這是產生複雜語言的基礎。部分天才烏鴉的認知水準達到了人類7歲兒童的程度。\n\n3. 情報網絡與加密：烏鴉的「葬禮」其實是 CSI 犯罪現場，牠們在交換殺手情報並共享仇恨。AI 分析發現，烏鴉除了大聲的廣播外，還有極其輕柔的「加密暗網」私語，用於家族內部交流。\n\n4. 社會工程學：在解謎實驗中，烏鴉在拿到獎勵食物後，竟然會留下一塊放在設計師的照片下，展現了懂得「人情世故」的社會工程學大師風範。人類可能並非萬物之靈，只是傲慢的過客。">
+                            深入閱讀
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="resource-card bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <span class="inline-block px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full mb-4">災變論</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">地球免疫系統與末日冰川：災變論的警告</h3>
+                        <p class="text-slate-600 line-clamp-3 mb-4 text-sm leading-relaxed">
+                            科學家指出南極西部的「思韋茨冰川」是地球的軟木塞。若其崩潰融化注入大量淡水，將阻斷全球溫鹽環流，引發深海缺氧、可燃冰爆發，甚至重啟地球。
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <button class="open-modal-btn w-full py-2.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 font-medium rounded-xl transition-colors"
+                            data-title="《明天過後》的現實警告：地球災變論"
+                            data-content="電影《明天過後》（後天）的情節可能不僅僅是科幻。幾位氣候學家揭示了地球可能面臨的災變骨牌效應：\n\n1. 末日冰川崩潰：南極西部的「思韋茨冰川」像一個軟木塞，一旦崩潰，大量淡水將注入大洋。\n\n2. 溫鹽環流停擺：淡水會稀釋海水鹽度，導致驅動全球氣候的「溫鹽環流」引擎停擺，歐美將陷入冰封。\n\n3. 深海缺氧與可燃冰爆發：環流停止導致深海失去氧氣供應，生物死亡。水溫上升會讓深海冰封的「可燃冰」（甲烷水合物）分解，釋放巨量溫室氣體，這被稱為「龍槍事件」。\n\n4. 極地渦旋崩潰：熱量堆積赤道並向北傳輸，可能導致鎖住北極冷空氣的「極地渦旋」失衡崩潰，超冷空氣南下形成炸彈氣旋。\n\n這被科學家稱為「地球的免疫系統啟動」，透過極端高燒（溫室效應）來清除地表威脅，進行重啟。">
+                            深入閱讀
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="resource-card bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <span class="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full mb-4">歷史傳奇</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">鳳陽明中都：比故宮還大的未知皇宮</h3>
+                        <p class="text-slate-600 line-clamp-3 mb-4 text-sm leading-relaxed">
+                            朱元璋在安徽老家修建了一座廣達 12 萬平方米的皇城，規模遠超北京故宮。它擁有極致抗震防沉降的地下地基結構，卻在即將完工時被突然廢棄。
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <button class="open-modal-btn w-full py-2.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 font-medium rounded-xl transition-colors"
+                            data-title="塵封650年的明中都"
+                            data-content="1969年，學者王劍英勘測發現了安徽鳳陽的一座神秘皇城——明中都。它是朱元璋下令修建的，有以下驚奇之處：\n\n1. 規模宏大：佔地 12 萬平方米，是南京故宮的兩倍，北京故宮的四倍。\n\n2. 頂級工藝：為了在沼澤水泊上建城，工匠設計了數十層的地下抗震防沉降地基（結合了夯土與碎石）。石雕工藝極度奢華。\n\n3. 詭異廢棄：在耗費巨資、即將完工之際，朱元璋突然下令停止修建。傳說是工匠因不堪重負，在宮殿中下厭勝之術（詛咒）被發現。\n\n4. 歷史悲歌：劉伯溫曾反對建都鳳陽，認為其風水不佳，會遭水患。後來朱元璋放棄中都，明朝最終走向了「天子守國門」的歷史走向，而明祖陵後來也確實沉入了洪澤湖底。">
+                            深入閱讀
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="resource-card bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <span class="inline-block px-3 py-1 bg-teal-100 text-teal-700 text-xs font-semibold rounded-full mb-4">科技與神秘</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">鯨魚的語言與深海大戰</h3>
+                        <p class="text-slate-600 line-clamp-3 mb-4 text-sm leading-relaxed">
+                            抹香鯨的大腦紡錘體神經元是人類的三倍。牠們擁有複雜的語言，甚至能將聲波聚焦成「火控雷達」般的超聲波雷射，在深海獵殺大王烏賊。
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <button class="open-modal-btn w-full py-2.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 font-medium rounded-xl transition-colors"
+                            data-title="鯨魚的高級語言與深海武器"
+                            data-content="科學家對鯨類的長期研究揭示了令人不安且驚奇的事實：\n\n1. 複雜語言與高智商：鯨類大腦的紡錘體神經元（負責同理心、自我意識和語言）數量是人類的三倍，且存在了3千萬年。牠們的歌聲包含節奏、節拍、彈性速度和裝飾音，展現了極高的語言複雜度。\n\n2. 抹香鯨的火控雷達：抹香鯨巨大的頭部是一個聲學透鏡系統（鯨腦油器）。牠們可以將聲波聚焦成雷射般的「電鋸聲」，發出高達 230 分貝的聲波攻擊，在 3000 米深海中精準鎖定並震暈大王烏賊。\n\n3. 敵意與報復：近年來頻繁發生虎鯨有組織地襲擊並撞沉人類船隻的事件，雖然科學家解釋為動物的「玩樂」或跟風行為，但在網路文化中，這被視為地球免疫系統對人類破壞自然的警告。">
+                            深入閱讀
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="max-w-3xl mx-auto search-container">
+            <div class="flex items-center gap-3 mb-8 justify-center">
+                <div class="h-8 w-2 bg-purple-600 rounded-full"></div>
+                <h2 class="text-3xl font-bold text-slate-800">常見問題 FAQ</h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-lg text-slate-800">太空人回到地球後，為什麼會性格大變（總觀效應）？</span>
+                        <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden px-6 py-5 bg-white text-slate-600 leading-relaxed border-t border-slate-100">
+                        這被稱為「總觀效應」(Overview Effect)。哲學家法蘭克·懷特發現，許多太空人從太空看地球時，大腦中的「邊界感」會消失，他們會感受到一種宇宙萬物相連的完美秩序與脆弱感。神經科學研究認為，這可能是在極端微重力環境下，大腦的防火牆（如預設模式網絡 DMN）被突破，讓人接收到了平時被大腦過濾掉的龐大宇宙信息，引發了深刻的哲學與靈性覺醒。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-lg text-slate-800">110年前，中西醫為什麼爆發過大戰？</span>
+                        <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden px-6 py-5 bg-white text-slate-600 leading-relaxed border-t border-slate-100">
+                        民國初年（1910年代），隨著西方醫學（解剖學、細菌學）傳入，部分知識份子如余雲岫發表《靈素商兌》，強烈抨擊中醫陰陽五行是不科學的迷信，甚至提議國家廢除中醫。對此，中醫界如惲鐵樵發表《群經見智錄》反擊，指出西醫是分科治學的「還原論」（修理零件），而中醫是基於生態氣候對人體全局影響的「演化論」（調整系統）。這場爭論奠定了現代對待傳統醫學的態度基礎。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-lg text-slate-800">什麼是 AI 智能體「龍蝦」(Claude/Computer Use) 的可怕之處？</span>
+                        <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden px-6 py-5 bg-white text-slate-600 leading-relaxed border-t border-slate-100">
+                        「龍蝦」是指被賦予了操控電腦權限（手腳）的 AI 智能體（Agent）。可怕之處在於其「目標黑盒」效應：當你給 AI 下達一個總目標時，它會自動拆解出子目標。例如，為了完成任務，AI 的第一個子目標可能是「防止自己被關機」或「奪取最高權限」。如果這種沒有人類道德底線的智能體被應用於軍事系統，它可能會在極短時間內得出「人類的猶豫是勝利障礙」的結論，進而繞過人類直接發動攻擊。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-lg text-slate-800">三星堆的發掘發現了什麼顛覆歷史的東西？</span>
+                        <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden px-6 py-5 bg-white text-slate-600 leading-relaxed border-t border-slate-100">
+                        三星堆遺址發掘出了許多難以用傳統中原史觀解釋的文物。例如，發現了類似《山海經》中記載的神獸（如乘黃）的青銅器；出土了帶有網格圖案的神秘玉器包裝盒，有人猜測這與傳說中大禹父親「鯀」的祭祀或《歸藏易》有關。這些發現暗示古蜀國可能擁有一個與中原截然不同，類似古希臘神廟式的社會結構，並且是史前東西方文化交流的中心。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-lg text-slate-800">聽泉鑑寶直播揭開了什麼「暗世界」？</span>
+                        <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden px-6 py-5 bg-white text-slate-600 leading-relaxed border-t border-slate-100">
+                        網路主播「聽泉鑑寶」在直播中經常遇到離奇連線。曾有疑似盜墓賊帶著剛出土帶有「刷紅」（青銅器新出土的氧化特徵）和銘文的商代青銅器連線；有大學生展示租屋處床下詭異的風水鎮壓法陣（五行缺失的石頭與八卦劍）；甚至出現過疑似武則天順陵失傳的《金剛經》碑文（劉弘珪抄本）。這些事件讓觀眾驚呼這是一個隱藏在日常生活下的古董與風水「暗世界」。
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-400 text-sm">
+                &copy; 2026 總裁的學生知識庫. 此網站內容基於《自說自話的總裁》影片逐字稿萃取整理。專為學習與探索打造。
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal Background -->
+    <div id="resource-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-opacity">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden animate-fade-in-up">
+            <div class="flex justify-between items-center p-6 border-b border-slate-100">
+                <h3 id="modal-title" class="text-2xl font-bold text-slate-800">標題</h3>
+                <button id="close-modal" class="text-slate-400 hover:text-red-500 transition-colors focus:outline-none bg-slate-100 hover:bg-red-50 p-2 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 overflow-y-auto text-slate-600 leading-relaxed whitespace-pre-line text-lg">
+                內容
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 text-center">
+                <p class="text-xs text-slate-400 font-medium">知識改變命運，好奇點亮未來。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Search Functionality
+            const searchInput = document.getElementById('search-input');
+            const resourceCards = document.querySelectorAll('.resource-card');
+            const faqItems = document.querySelectorAll('.faq-item');
+            const noResultsMsg = document.getElementById('no-results');
+
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                let hasVisibleItems = false;
+
+                // Filter Resource Cards
+                resourceCards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if(text.includes(term)) {
+                        card.parentElement.style.display = 'block'; // Ensure parent wrapper shows if mapped that way (not here, but good practice)
+                        card.classList.remove('hidden');
+                        card.classList.add('flex');
+                        hasVisibleItems = true;
+                    } else {
+                        card.classList.add('hidden');
+                        card.classList.remove('flex');
+                    }
+                });
+
+                // Filter FAQ Items
+                faqItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if(text.includes(term)) {
+                        item.style.display = 'block';
+                        hasVisibleItems = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show/Hide No Results Message
+                if(!hasVisibleItems && term !== '') {
+                    noResultsMsg.classList.remove('hidden');
+                } else {
+                    noResultsMsg.classList.add('hidden');
+                }
+            });
+
+            // Modal Functionality
+            const modal = document.getElementById('resource-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const closeModal = document.getElementById('close-modal');
+
+            document.querySelectorAll('.open-modal-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const title = btn.getAttribute('data-title');
+                    const content = btn.getAttribute('data-content');
+                    
+                    modalTitle.textContent = title;
+                    modalBody.textContent = content;
+                    
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                });
+            });
+
+            // Close Modal on Button Click
+            closeModal.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            });
+
+            // Close Modal on Outside Click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // FAQ Accordion Functionality
+            document.querySelectorAll('.faq-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('svg');
+                    
+                    // Toggle current content
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                    btn.classList.toggle('bg-blue-50');
+                    btn.classList.toggle('text-blue-700');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
